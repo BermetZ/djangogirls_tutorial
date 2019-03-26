@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Post
 from .forms import PostForm
@@ -37,9 +37,9 @@ class PostCreate(CreateView):
 
     def form_valid(self, form):
         if form.is_valid():
-            form.author = self.request.user
-            form.published_date = timezone.now()
-            form.save()
+            form.instance.author = self.request.user
+            form.instance.published_date = timezone.now()
+            #form.save()
         return super().form_valid(form)
 
     def get_success_url(self):
