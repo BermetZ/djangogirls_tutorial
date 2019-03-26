@@ -39,7 +39,6 @@ class PostCreate(CreateView):
         if form.is_valid():
             form.instance.author = self.request.user
             form.instance.published_date = timezone.now()
-            #form.save()
         return super().form_valid(form)
 
     def get_success_url(self):
